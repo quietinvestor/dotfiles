@@ -84,3 +84,7 @@ require('lspconfig')['sumneko_lua'].setup {
 require('lspconfig')['yamlls'].setup {
   capabilities = capabilities
 }
+
+require('lspconfig')['vimls'].setup {
+  capabilities = capabilities
+}

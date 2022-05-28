@@ -59,3 +59,6 @@ require('lspconfig').yamlls.setup {
     },
   }
 }
+
+-- vimls vim LSP
+require'lspconfig'.vimls.setup{}
