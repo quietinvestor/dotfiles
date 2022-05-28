@@ -1,0 +1,22 @@
+[user]
+        name = username
+        # Email must match that of GPG key for
+        # github commit signature verification.
+        email = username@domain.com
+        # Recommended to use a signing subkey.
+        signingkey = FFFFFFFFFFFFFFFF
+[commit]
+        gpgSign = true
+[core]
+        # Use Neovim.
+	editor = nvim
+[diff]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE
+[gpg]
+        format = openpgp
+[merge]
+	tool = nvimdiff4
+[mergetool "nvimdiff4"]
+	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
