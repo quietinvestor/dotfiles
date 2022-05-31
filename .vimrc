@@ -36,17 +36,11 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
-" Gruvbox theme.
-Plug 'morhetz/gruvbox'
+" Catppuccin theme.
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " Initialize plugin system
 call plug#end()
-
-" Most terminals don't handle italics right so gruvbox disables italics for
-" terminals by default. But if you're using urxvt or gnome-terminal you
-" should try setting let g:gruvbox_italic=1 before colorscheme gruvbox to
-" enforce displaying italics.  
-let g:gruvbox_italic=1
 
 " Colour fix for termguicolors to work in tmux.
 " See :h xterm-true-color for details.
@@ -61,7 +55,4 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
 " Load gruvbox theme.
-autocmd vimenter * colorscheme gruvbox
-
-" Set dark gruvbox theme.
-set background=dark
+autocmd vimenter * colorscheme catppuccin_mocha
