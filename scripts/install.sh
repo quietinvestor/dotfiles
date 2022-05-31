@@ -1,10 +1,48 @@
 #!/bin/bash
 
+# Work out where in path this
+# script is located
 SCRIPTDIR=$(cd $(dirname $0) && pwd)
+# Work out where the script's
+# parent directory is located
 BASEDIR=$(dirname $SCRIPTDIR)
 
-# Files
-FILE=test.txt
+# Neovim directories
+# Source locations
+HOME_NVIMDIR=$HOME/.config/nvim
+HOME_NVIMLUADIR=$HOME_NVIMDIR/lua
+# Target locations
+NVIMDIR=$BASEDIR/nvim
+NVIMLUADIR=$NVIMDIR/lua
+
+# Configuration files
+# 0 -> Make a copy of file
+# 1 -> Create a symlink to file
+declare -A BASE_CONFIG_FILES=(
+  [.bashrc]=1
+  [.gitconfig]=0 # No symlink as it contains credentials
+  [.tmux.conf]=1
+  [.vimrc]=1
+)
+
+# Neovim configuration files
+declare -A NVIM_INIT_CONFIG=(
+  [init.lua]=1
+)
+
+declare -A NVIM_CONFIG_FILES=(
+  [autocomplete.lua]=1
+  [filexplorer.lua]=1
+  [keymaps.lua]=1
+  [lsp.lua]=1
+  [plugins.lua]=1
+  [settings.lua]=1
+  [snippets.lua]=1
+  [statusline.lua]=1
+  [tabs.lua]=1
+  [theme.lua]=1
+  [treesitter.lua]=1
+)
 
 # $1 -> Symlink file name
 # $2 -> Symlink location directory
@@ -12,14 +50,14 @@ FILE=test.txt
 function create_symlink() {
   # Check if file exists in target
   # file directory
-  if test -f "$3/$1"; then
+  if [ -f $3/$1 ]; then
     # Check if symbolic link exists in 
     # symlink location directory
-    if test -L $2/$1; then
+    if [ -L $2/$1 ]; then
       # Check if symlink is pointing
       # to the expected destination
-      if test $2/$1 -ef $3/$1; then
-        echo "Nothing to do for $1. Symlink pointing to $3 already exists at $2."
+      if [ $2/$1 -ef $3/$1 ]; then
+        echo "- Nothing to do for $1. Symlink pointing to $3 already exists at $2."
         # Success
         return 0
       else
@@ -29,19 +67,50 @@ function create_symlink() {
     else
       # Check if an actual file exists with the
       # same name in the symlink location directory
-      if test -f $2/$1; then
+      if [ -f $2/$1 ]; then
         # Rename original file with .bak extension
         # for backup
         mv $2/$1 $2/${1/%/.bak}
+        echo "- WARNING: $1 already exists in $2, although not as a symbolic link. The original has been renamed with the .bak extension as a backup prior to creating the symlink pointing to $3. If this has replaced an existing configuration that you wished to keep, delete the newly-created symlink and remove the .bak extension from the original file."
       fi
     fi
     # Create symlink
     ln -s $3/$1 $2/$1
-    echo "Symlink created for $1 at $2, pointing to $3."
+    echo "- Symlink created for $1 at $2, pointing to $3."
   else
-    echo "No $1 exists in $3 to symlink to $2."
+    echo "- No $1 exists in $3 to symlink to $2."
   fi
 }
 
+# $1 -> Associative array with configuration file names
+# $2 -> Symlink location directory
+# $3 -> Symlink target file directory
+function deploy_configs() {
+  # Declare a local reference variable to pass
+  # associative array by reference to function
+  local -n configs_ref=$1
+  # Iterate through configuration files
+  # and create a symlink or copy as appropriate
+  for file in "${!configs_ref[@]}"
+  do
+    if [ "${configs_ref[${file}]}" -eq 1 ]; then
+      create_symlink "${file}" $2 $3
+    else
+      # Check if an actual file exists with the
+      # same name in the symlink location directory
+      if [ -f $2/"${file}" ]; then
+        # Rename original file with .bak extension
+        # for backup
+        mv $2/"${file}" $2/"${file/%/.bak}"
+        echo "- WARNING: ${file} already exists in $2. The original has been renamed with the .bak extension as a backup prior to copying the new version with generic credentials from $3. If this has replaced an existing configuration with credentials, delete the newly copied file and remove the .bak extension from the original file."
+      fi
+      echo "- Successfully copied ${file} from $3 to $2. Please remember to replace the generic credentials with your own actual ones."
+      cp $3/"${file}" $2/"${file}"
+    fi
+  done
+}
 
-create_symlink $FILE $HOME $BASEDIR
+# Deploy configuration files
+deploy_configs BASE_CONFIG_FILES $HOME $BASEDIR
+deploy_configs NVIM_INIT_CONFIG $HOME_NVIMDIR $NVIMDIR
+deploy_configs NVIM_CONFIG_FILES $HOME_NVIMLUADIR $NVIMLUADIR
