@@ -1,4 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#
+# install_dotfiles - automatically deploy dotfile configuration files
+# in the corresponding folders within the user's $HOME directory.
+# Create symlinks where possible and only copy files when credentials
+# need to be inserted, for security.
 
 # Work out where in path this
 # script is located
@@ -50,13 +55,13 @@ declare -A NVIM_CONFIG_FILES=(
 function create_symlink() {
   # Check if file exists in target
   # file directory
-  if [ -f $3/$1 ]; then
+  if [[ -f $3/$1 ]]; then
     # Check if symbolic link exists in 
     # symlink location directory
-    if [ -L $2/$1 ]; then
+    if [[ -L $2/$1 ]]; then
       # Check if symlink is pointing
       # to the expected destination
-      if [ $2/$1 -ef $3/$1 ]; then
+      if [[ $2/$1 -ef $3/$1 ]]; then
         echo "- Nothing to do for $1. Symlink pointing to $3 already exists at $2."
         # Success
         return 0
@@ -67,7 +72,7 @@ function create_symlink() {
     else
       # Check if an actual file exists with the
       # same name in the symlink location directory
-      if [ -f $2/$1 ]; then
+      if [[ -f $2/$1 ]]; then
         # Rename original file with .bak extension
         # for backup
         mv $2/$1 $2/${1/%/.bak}
@@ -93,12 +98,12 @@ function deploy_configs() {
   # and create a symlink or copy as appropriate
   for file in "${!configs_ref[@]}"
   do
-    if [ "${configs_ref[${file}]}" -eq 1 ]; then
+    if (( "${configs_ref[${file}]}" == 1 )); then
       create_symlink "${file}" $2 $3
     else
       # Check if an actual file exists with the
       # same name in the symlink location directory
-      if [ -f $2/"${file}" ]; then
+      if [[ -f $2/"${file}" ]]; then
         # Rename original file with .bak extension
         # for backup
         mv $2/"${file}" $2/"${file/%/.bak}"
