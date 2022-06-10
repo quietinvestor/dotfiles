@@ -62,3 +62,6 @@ require('lspconfig').yamlls.setup {
 
 -- vimls vim LSP
 require'lspconfig'.vimls.setup{}
+
+-- ltex LTeX LSP, including support for markdown and others
+require'lspconfig'.ltex.setup{}
