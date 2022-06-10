@@ -156,18 +156,19 @@ If you want to learn how to use Neovim, the best way is simply to open a new ins
 
 ## 8. vim
 
-[VI Improved (VIM)](https://www.vim.org/about.php) is the successor of [vi](https://www.vim.org/viusers.php), a text editor which is included by default on most Linux distros. You therefore might have to [install vim](https://www.vim.org/download.php) in your particular operating system.
+[VI iMproved (VIM)](https://www.vim.org/about.php) is the successor of [vi](https://www.vim.org/viusers.php), a text editor which is included by default on most Linux distros. You therefore might have to [install vim](https://www.vim.org/download.php) in your particular operating system.
 
 Its main advantage, aside from its sheer power as a text editor, is that you will find it on most Linux/Unix operating systems. Although I prefer Neovim, oftentimes in remote systems, vim is the only thing that you will have. :wink: Hence, it comes in handy to keep a custom `.vimrc` configuration file for it. Create a symbolic link in your `$HOME` directory, pointing to the `.vimrc` file in the `dotfiles` cloned repository.
 
-vim also uses plugins to augment its functionality. I use [junegunn/vim-plug](https://github.com/junegunn/vim-plug) to install and manage them. As per the instructions therein,  you first need to install it, then add the plugins that you wish to install to your `.vimrc` file, save it and run `:PlugInstall`.
-
-Given that vim has quite sane defaults and I try to minimise its use nowadays, the only plugin that I currently have installed is the below:
+vim also uses plugins to augment its functionality. Since vim 8.0, you can manage plugins natively via `packages`: simply clone the given plugin's git repository under `~./vim/pack/*/start/` (where * can be any directory name you like) and the plugin should autoload after restarting vim (for additional help, type `:h packages` inside vim). The below are the ones I currently use (*so far*):
 
 - [catppuccin/vim](https://github.com/catppuccin/vim) - *Catppuccin theme*
+- [junegunn/fzf](https://github.com/junegunn/fzf) - *FZF fuzzy file search (pre-requirement for the below)*
+- [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim) - *FZF fuzzy file search*
+- [preservim/nerdtree](https://github.com/preservim/nerdtree) - *NERDTree file explorer*
+- [itchyny/lightline.vim](https://github.com/itchyny/lightline.vim) - *lightline statusline*
+- [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons) - *render Nerd Font icons*
 
 However, please feel free to add any plugins you like.
-
-Unfortunately, vim does not support [LSP servers](https://neovim.io/doc/lsp/) or [Treesitter](https://neovim.io/doc/treesitter/) like [Neovim](#7-neovim), but you can add filetype recognition by creating your own [language-specific plugin](https://vim.fandom.com/wiki/Filetype.vim) stored in `$VIMRUNTIME/after/ftplugin/<filetype>.vim`, as well as filetype indent rules via indent files stored in `$VIMRUNTIME/after/indent/<filetype>.vim`.
 
 If you want to learn how to use vim, the best way is to simply type `vimtutor` into your terminal.
