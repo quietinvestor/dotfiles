@@ -28,3 +28,6 @@ unset rc
 
 # Custom bash prompt.
 PS1="\u@\h\$ "
+
+# FZF fuzzy search support
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
