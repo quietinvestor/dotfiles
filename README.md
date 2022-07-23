@@ -141,6 +141,7 @@ Should you want to delete any of the above plugins, simply remove them from `nvi
 Many of the major improvements in Neovim over vim result from the use of [LSP (Language Server Protocol) servers](https://neovim.io/doc/lsp/) and [Treesitter](https://neovim.io/doc/treesitter/) for language-specific auto-completion, indentation and syntax highlighting, amongst other things. Therefore, for many of the above language-related plugins to work and to leverage the full power of Neovim, you also need to install LSP servers for each language that you plan to use. Below are the LSP servers that I use (*so far*), including instructions on how to install and deploy them:
 
 - [bashls](https://github.com/bash-lsp/bash-language-server) - *Bash*
+- [clangd](https://clangd.llvm.org/installation.html) - *C*
 - [dockerls](https://github.com/rcjsuen/dockerfile-language-server-nodejs) - *Dockerfiles*
 - [jsonls](https://github.com/hrsh7th/vscode-langservers-extracted) - *JSON*
 - [sumneko_lua](https://github.com/sumneko/lua-language-server) - *Lua*

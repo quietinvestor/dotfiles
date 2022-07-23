@@ -3,6 +3,9 @@
 -- Use LSP as the handler for omnifunc for autocompletion.
 -- vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+--- clangd C LSP
+require'lspconfig'.clangd.setup{}
+
 -- pyright Python LSP
 require'lspconfig'.pyright.setup{}
 
