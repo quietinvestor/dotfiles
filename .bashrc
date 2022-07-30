@@ -31,3 +31,7 @@ PS1="\u@\h\$ "
 
 # FZF fuzzy search support
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Use nvim as default editor
+VISUAL=/usr/bin/nvim
+EDITOR=$VISUAL
