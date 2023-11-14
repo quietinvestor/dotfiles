@@ -144,14 +144,14 @@ Many of the major improvements in Neovim over vim result from the use of [LSP (L
 - [clangd](https://clangd.llvm.org/installation.html) - *C*
 - [dockerls](https://github.com/rcjsuen/dockerfile-language-server-nodejs) - *Dockerfiles*
 - [jsonls](https://github.com/hrsh7th/vscode-langservers-extracted) - *JSON*
-- [sumneko_lua](https://github.com/sumneko/lua-language-server) - *Lua*
+- [lua_ls](https://github.com/luals/lua-language-server) - *Lua*
 - [pyright](https://github.com/microsoft/pyright) - *Python*
 - [vimls](https://github.com/iamcco/vim-language-server) - *VimScript*
 - [yamlls](https://github.com/redhat-developer/yaml-language-server) - *YAML*
 
 However, [many more LSP servers are supported](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md), so feel free to install and add them to `nvim/lua/lsp.lua` as you see fit.
 
-Most LSP servers require [Node.js](https://nodejs.org/en/download/) and are installed via its `npm` package manager. Others (e.g. `yamlls`) require [yarn](https://classic.yarnpkg.com/lang/en/docs/install/), which may also be installed using `npm`. Out of the above, only `sumneko_lua` requires C++ compilation from source, whose steps are described in its project website linked to above.
+Most LSP servers require [Node.js](https://nodejs.org/en/download/) and are installed via its `npm` package manager. Others (e.g. `yamlls`) require [yarn](https://classic.yarnpkg.com/lang/en/docs/install/), which may also be installed using `npm`. Out of the above, only `lua_ls` requires C++ compilation from source, whose steps are described in its project website linked to above.
 
 If you want to learn how to use Neovim, the best way is simply to open a new instance on your terminal by typing `nvim`, followed by `:Tutor` once inside Neovim.
 
