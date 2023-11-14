@@ -17,32 +17,35 @@ return require('packer').startup(function()
   use 'saadparwaiz1/cmp_luasnip'
 
   -- catpuccin theme
-  use({
+  use {
 	"catppuccin/nvim",
 	as = "catppuccin"
-  })
+  }
 
   -- Treesitter
-  use({
+  use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  })
+    run = function()
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        ts_update()
+    end,
+  }
 
   -- nvim-tree file explorer
-  use({
+  use {
     'kyazdani42/nvim-tree.lua',
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icon
     }
-  })
+  }
 
   -- barbar buffer tabs
-  use({
+  use {
     'romgrk/barbar.nvim',
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icon
     }
-  })
+  }
 
   -- lualine statusline
   use {
