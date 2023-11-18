@@ -62,6 +62,10 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+require('lspconfig')['clangd'].setup {
+  capabilities = capabilities
+}
+
 require('lspconfig')['bashls'].setup {
   capabilities = capabilities
 }
@@ -74,7 +78,7 @@ require('lspconfig')['jsonls'].setup {
   capabilities = capabilities
 }
 
-require('lspconfig')['pyright'].setup {
+require('lspconfig')['ltex'].setup {
   capabilities = capabilities
 }
 
@@ -82,10 +86,18 @@ require('lspconfig')['lua_ls'].setup {
   capabilities = capabilities
 }
 
-require('lspconfig')['yamlls'].setup {
+require('lspconfig')['pyright'].setup {
+  capabilities = capabilities
+}
+
+require('lspconfig')['terraformls'].setup {
   capabilities = capabilities
 }
 
 require('lspconfig')['vimls'].setup {
+  capabilities = capabilities
+}
+
+require('lspconfig')['yamlls'].setup {
   capabilities = capabilities
 }

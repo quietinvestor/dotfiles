@@ -6,8 +6,24 @@
 --- clangd C LSP
 require'lspconfig'.clangd.setup{}
 
--- pyright Python LSP
-require'lspconfig'.pyright.setup{}
+-- bashls Bash LSP
+require'lspconfig'.bashls.setup{}
+
+-- dockerls Docker LSP
+require'lspconfig'.dockerls.setup{}
+
+-- jsonls JSON LSP
+
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.jsonls.setup {
+  capabilities = capabilities,
+}
+
+-- ltex LTeX LSP, including support for markdown and others
+require'lspconfig'.ltex.setup{}
 
 -- lua_ls LSP
 require'lspconfig'.lua_ls.setup {
@@ -41,21 +57,14 @@ require'lspconfig'.lua_ls.setup {
   end
 }
 
--- bashls Bash LSP
-require'lspconfig'.bashls.setup{}
+-- pyright Python LSP
+require'lspconfig'.pyright.setup{}
 
--- dockerls Docker LSP
-require'lspconfig'.dockerls.setup{}
+-- terraform-ls HCL LSP
+require'lspconfig'.terraformls.setup{}
 
--- jsonls JSON LSP
-
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require'lspconfig'.jsonls.setup {
-  capabilities = capabilities,
-}
+-- vimls vim LSP
+require'lspconfig'.vimls.setup{}
 
 -- yamlls YAML LSP
 require('lspconfig').yamlls.setup {
@@ -70,9 +79,3 @@ require('lspconfig').yamlls.setup {
     },
   }
 }
-
--- vimls vim LSP
-require'lspconfig'.vimls.setup{}
-
--- ltex LTeX LSP, including support for markdown and others
-require'lspconfig'.ltex.setup{}

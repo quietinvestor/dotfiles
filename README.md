@@ -145,7 +145,9 @@ Many of the major improvements in Neovim over vim result from the use of [LSP (L
 - [dockerls](https://github.com/rcjsuen/dockerfile-language-server-nodejs) - *Dockerfiles*
 - [jsonls](https://github.com/hrsh7th/vscode-langservers-extracted) - *JSON*
 - [lua_ls](https://github.com/luals/lua-language-server) - *Lua*
+- [ltex](https://github.com/valentjn/ltex-ls) - *LaTeX*
 - [pyright](https://github.com/microsoft/pyright) - *Python*
+- [terraform-ls](https://github.com/hashicorp/terraform-ls) - *Terraform*
 - [vimls](https://github.com/iamcco/vim-language-server) - *VimScript*
 - [yamlls](https://github.com/redhat-developer/yaml-language-server) - *YAML*
 

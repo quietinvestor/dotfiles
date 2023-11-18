@@ -11,6 +11,7 @@ require'nvim-treesitter.configs'.setup {
     "latex",
     "lua",
     "python",
+    "terraform",
     "vim",
     "yaml"
   },
